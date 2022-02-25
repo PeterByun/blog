@@ -1,0 +1,11 @@
+$primary-color: #3527f0;
+$bg-color-1: #141414;
+$bg-color-2: #272727;
+$bg-color-3: #424242;
+
+:export {
+  primaryColor: $primary-color;
+}
+
+// Use the above variable like this:
+// import variables from '../styles/variables.module.scss'
