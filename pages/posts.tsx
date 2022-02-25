@@ -3,14 +3,16 @@ import styles from "../styles/index.module.scss";
 import type { ReactElement } from "react";
 import Layout from "../components/Layout";
 
-export default function Page() {
+const Posts = () => {
   return (
     <div className={styles.container}>
-      <div>Home!</div>
+      <div>Posts!</div>
     </div>
   );
-}
+};
 
-Page.getLayout = function getLayout(page: ReactElement) {
+export default Posts;
+
+Posts.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };

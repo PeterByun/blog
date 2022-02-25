@@ -1,16 +1,17 @@
-import styles from "../styles/index.module.scss";
-
 import type { ReactElement } from "react";
 import Layout from "../components/Layout";
+import styles from "../styles/index.module.scss";
 
-export default function Page() {
+const Resume = () => {
   return (
     <div className={styles.container}>
-      <div>Home!</div>
+      <div>Resume!</div>
     </div>
   );
-}
+};
 
-Page.getLayout = function getLayout(page: ReactElement) {
+export default Resume;
+
+Resume.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };

@@ -1,3 +1,31 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-var-requires": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    // These two JSX related rules are no logner needed with the new JSX runtime(automatic)
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
+  }
 }

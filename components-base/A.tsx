@@ -1,9 +1,13 @@
 import { AnchorHTMLAttributes } from "react";
 
-export const A = (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
+export const A = ({
+  forwardProps,
+}: {
+  forwardProps: AnchorHTMLAttributes<HTMLAnchorElement>;
+}) => {
   return (
-    <a href="" {...props}>
-      {props.children}
+    <a href="" {...forwardProps}>
+      {forwardProps.children}
     </a>
   );
 };
