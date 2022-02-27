@@ -53,8 +53,8 @@ const Resume = () => {
           환경가전업계 1위 코웨이 DX센터의 공통플랫폼 개발팀에서 프론트엔드
           개발자로써 회원인증 시스템 프론트엔드를 구축.
           <br />
-          이후 조직개편으로 인해 클라이언트 개발팀에서 회원인증 프론트엔드
-          유지보수, 개선 업무를 수행.
+          이후 조직개편으로 인해 클라이언트 개발팀 소속이 되어 회원인증
+          프론트엔드 유지보수, 개선 업무를 수행.
         </P>
       </Container>
 
@@ -74,7 +74,7 @@ const Resume = () => {
         <br />
         인지능력을 향상시키는 게임을 개발하는 게임회사의 인턴으로써 신제품
         프로토타입 개발의 연구보조 업무를 수행하고 연구실의 상사로부터 추천서를
-        받음.
+        받았다.
       </Container>
 
       <hr />
@@ -92,7 +92,11 @@ const Resume = () => {
             기존의 파편화된 회원 체계를 통합하고 복잡한 회원가입 절차를 간소화
             하기위한 통합 회원 인증 시스템.
             <br />
-            현재는 <a href="https://www.coway.com/">코웨이닷컴</a>,{" "}
+            현재는 <a href="https://www.coway.com/">코웨이닷컴</a>,&nbsp;
+            <a href="https://apps.apple.com/kr/app/%EC%BD%94%EC%9B%A8%EC%9D%B4%EB%8B%B7%EC%BB%B4/id1594310371">
+              코웨이닷컴앱
+            </a>
+            ,&nbsp;
             <a href="https://apps.apple.com/kr/app/coway-iocare/id1045884963">
               IoCare
             </a>
@@ -110,7 +114,8 @@ const Resume = () => {
           </ul>
           <strong>프론트엔드 개발자</strong>로써 이 중에서 프론트엔드,
           JavaScript SDK를 최초 구축하고 <br />
-          운영 배포이후엔 세개의 서비스 모두 담당하여 유지보수.
+          운영 배포이후엔 세개의 서비스 모두 담당하여 유지보수와 개선업무를
+          수행했다.
         </ProjectDescription>
 
         <ProjectDescription title="주요 성과">
@@ -143,7 +148,7 @@ const Resume = () => {
 
             <dt>크로스 브라우징</dt>
             <dd>
-              다양한 기기와 브라우저에서 동일한 동작을 하도록 개발. <br />
+              다양한 기기와 브라우저에서 동작 하도록 개발. <br />
               카카오와 네이버의 웹뷰 환경, IE11도 지원.
             </dd>
           </dl>
@@ -221,8 +226,8 @@ const Resume = () => {
             </dd>
             <dt> QA 전담</dt>
             <dd>
-              개발 중반부터는 메인으로 대부분 기능을 개발하여 QA를 전담하였고,
-              성공적으로 운영 배포를 마쳤다.
+              개발 중반부터는 메인으로 대부분 기능을 개발하였으므로 QA를
+              전담하였고, 성공적으로 프로젝트 마감에 맞추어서 배포까지 완료했다.
             </dd>
           </dl>
         </ProjectDescription>
@@ -278,6 +283,7 @@ const Resume = () => {
         </ol>
       </Container>
     </div>
+    // TODO: 컴포넌트화를 하고 DUOAI도 적는다.
   );
 };
 

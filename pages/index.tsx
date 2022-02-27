@@ -10,7 +10,7 @@ export default function Page() {
       <H level={2}>
         안녕하세요, <br />
         <br />
-        안정적이고 편한 서비스를 만들기위해 노력하는 프론트엔드 개발자
+        안정적이고 편리한 서비스를 만들기위해 노력하는 프론트엔드 개발자
         <br />
         <br />
       </H>
@@ -24,7 +24,7 @@ export default function Page() {
         </H>
       </div>
 
-      {/* <P>요기에 깃헙, 연락처 등 걸 예정</P> */}
+      {/* TODO: WebGL활용하여 전화번호, 이메일, 깃헙 등 링크 설정   */}
     </div>
   );
 }
