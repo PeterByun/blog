@@ -1,9 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
 
-export const Button = ({
-  forwardProps,
-}: {
-  forwardProps: ButtonHTMLAttributes<HTMLButtonElement>;
-}) => {
-  return <button {...forwardProps}>{forwardProps.children}</button>;
+export const Button = (props: {} & ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return <button {...props}>{props.children}</button>;
 };

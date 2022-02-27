@@ -1,12 +1,11 @@
-import styles from "../styles/index.module.scss";
-
 import type { ReactElement } from "react";
 import Layout from "../components/Layout";
 
 const Posts = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <div>Posts!</div>
+      {/* 여기엔 블로그 글을 쓸거다 */}
     </div>
   );
 };

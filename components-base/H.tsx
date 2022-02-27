@@ -1,20 +1,18 @@
 import { HTMLAttributes } from "react";
 
-export const H = ({
-  level,
-  forwardProps,
-}: {
-  level: number;
-  forwardProps: HTMLAttributes<HTMLHeadingElement>;
-}) => {
+export const H = (
+  props: {
+    level: number;
+  } & HTMLAttributes<HTMLHeadingElement>
+) => {
   return (
     <>
-      {level === 1 ? (
-        <h1 {...forwardProps}>{forwardProps.children}</h1>
-      ) : level === 2 ? (
-        <h2 {...forwardProps}>{forwardProps.children}</h2>
+      {props.level === 1 ? (
+        <h1 {...props}>{props.children}</h1>
+      ) : props.level === 2 ? (
+        <h2 {...props}>{props.children}</h2>
       ) : (
-        <h3 {...forwardProps}>{forwardProps.children}</h3>
+        <h3 {...props}>{props.children}</h3>
       )}
     </>
   );

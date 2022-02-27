@@ -1,0 +1,21 @@
+@import "./variables.scss";
+
+@mixin container {
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.container-1 {
+  @include container;
+  background-color: $bg-color-1;
+}
+
+.container-2 {
+  @include container;
+  background-color: $bg-color-2;
+}
+
+.container-3 {
+  @include container;
+  background-color: $bg-color-3;
+}

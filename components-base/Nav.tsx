@@ -1,22 +1,34 @@
 import { HTMLAttributes } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const Nav = ({
-  forwardProps,
-}: {
-  forwardProps?: HTMLAttributes<HTMLDivElement>;
-}) => {
+const routes = {
+  resume: "/resume",
+  home: "/",
+  posts: "/posts",
+};
+
+const getLinkClassByCurrentPath =
+  (routerPathName: string) => (pathName: string) => {
+    return routerPathName === pathName ? "active" : "";
+  };
+
+const Nav = (props: {} & HTMLAttributes<HTMLDivElement>) => {
+  const router = useRouter();
+
+  const getLinkClass = getLinkClassByCurrentPath(router.pathname);
+
   return (
-    <nav {...forwardProps}>
-      <Link href="/resume">
-        <a>Resume</a>
+    <nav {...props} className="nav-root">
+      <Link href={routes.resume}>
+        <a className={getLinkClass(routes.resume)}>이력서</a>
       </Link>
-      <Link href="/">
-        <a>Home</a>
+      <Link href={routes.home}>
+        <a className={getLinkClass(routes.home)}>처음으로</a>
       </Link>
-      <Link href="/posts">
-        <a>Posts</a>
+      <Link href={routes.posts}>
+        <a className={getLinkClass(routes.posts)}>게시글</a>
       </Link>
     </nav>
   );

@@ -1,0 +1,57 @@
+@import "./variables.scss";
+
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  color: white;
+  background-color: $bg-color-1;
+  padding: 0;
+  margin: 0;
+  font-family: GmarketSansMedium, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+}
+
+body {
+  #__next {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0 2rem 6rem 2rem;
+  }
+}
+
+a {
+  color: $primary-color-3-inactive;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: $primary-color-3-active;
+  }
+}
+
+h1,
+h2,
+h3 {
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.inline {
+  display: inline;
+}
+
+.margin-bottom-1 {
+  margin-bottom: 1rem;
+}

@@ -1,9 +1,5 @@
 import { HTMLAttributes } from "react";
 
-export const P = ({
-  forwardProps,
-}: {
-  forwardProps: HTMLAttributes<HTMLParagraphElement>;
-}) => {
-  return <p {...forwardProps}>{forwardProps.children}</p>;
+export const P = (props: {} & HTMLAttributes<HTMLParagraphElement>) => {
+  return <p {...props}>{props.children}</p>;
 };
