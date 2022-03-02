@@ -6,7 +6,8 @@ import {
   Tools,
   Vector3,
   HemisphericLight,
-  MeshBuilder,
+  Mesh,
+  StandardMaterial,
 } from "babylonjs";
 
 import Layout from "../components/Layout";
@@ -27,13 +28,14 @@ export default function Page() {
     var createScene = function () {
       // This creates a basic Babylon Scene object (non-mesh)
       var scene = new Scene(engine);
+      scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
       // This creates and positions a free camera (non-mesh)
       var camera = new ArcRotateCamera(
         "ArcRotateCamera",
         Tools.ToRadians(-270),
-        Math.PI / 2,
-        90,
+        Math.PI / 3,
+        5.5,
         new Vector3(0, 0, 0),
         scene
       );
@@ -44,45 +46,37 @@ export default function Page() {
       // This attaches the camera to the canvas
       camera.attachControl(renderCanvas.current, true);
 
-      // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-      var light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+      var light = new HemisphericLight("light", new Vector3(0, 10, 0), scene);
 
-      // Default intensity is 1. Let's dim the light a small amount
       light.intensity = 0.7;
 
-      // Our built-in 'sphere' shape.
-      var sphere1 = MeshBuilder.CreateSphere(
-        "sphere",
-        { diameter: 2, segments: 32 },
-        scene
-      );
-      var sphere2 = MeshBuilder.CreateSphere(
-        "sphere",
-        { diameter: 2, segments: 32 },
-        scene
-      );
-      var sphere3 = MeshBuilder.CreateSphere(
-        "sphere",
-        { diameter: 2, segments: 32 },
-        scene
-      );
+      var coin1 = Mesh.CreateCylinder("sphere", 0.5, 2, 2, 32, 1, scene);
+      var coin2 = Mesh.CreateCylinder("sphere", 0.5, 2, 2, 32, 1, scene);
+      var coin3 = Mesh.CreateCylinder("sphere", 0.5, 2, 2, 32, 1, scene);
 
-      // Move the sphere upward 1/2 its height
-      sphere1.position.x = -2;
-      sphere1.position.y = 1;
+      coin1.position.x = 2.5;
+      coin1.position.y = 0;
+      coin1.rotatePOV(1.1, 0, 0);
+      var coinMatirial = new StandardMaterial("CoinMatirial", scene);
+      coinMatirial.alpha = 1;
+      coinMatirial.diffuseColor = new BABYLON.Color3(1, 1.52, 1);
+      coin1.material = coinMatirial;
 
-      sphere2.position.x = 0;
-      sphere2.position.y = 1;
+      coin2.position.x = 0;
+      coin2.position.y = 0;
+      coin2.rotatePOV(1.1, 0, 0);
+      var coin2Matirial = new StandardMaterial("CoinMatirial", scene);
+      coin2Matirial.alpha = 1;
+      coin2Matirial.diffuseColor = new BABYLON.Color3(1.52, 1, 1);
+      coin2.material = coin2Matirial;
 
-      sphere3.position.x = 2;
-      sphere3.position.y = 1;
-
-      // Our built-in 'ground' shape.
-      var ground = MeshBuilder.CreateGround(
-        "ground",
-        { width: 6, height: 4 },
-        scene
-      );
+      coin3.position.x = -2.5;
+      coin3.position.y = 0;
+      coin3.rotatePOV(1.1, 0, 0);
+      var coin3Matirial = new StandardMaterial("CoinMatirial", scene);
+      coin3Matirial.alpha = 1;
+      coin3Matirial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
+      coin3.material = coin3Matirial;
 
       return scene;
     };
