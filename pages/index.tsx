@@ -8,7 +8,9 @@ import {
   HemisphericLight,
   Mesh,
   StandardMaterial,
+  SceneLoader,
 } from "babylonjs";
+import "babylonjs-loaders";
 
 import Layout from "../components/Layout";
 
@@ -78,19 +80,26 @@ export default function Page() {
       coin3Matirial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
       coin3.material = coin3Matirial;
 
+      SceneLoader.Load("../models/", "phone.glb", engine, function (scene) {
+        scene.createDefaultCamera(true, true, true);
+        scene.createDefaultEnvironment({
+          createGround: false,
+          createSkybox: false,
+        });
+      });
+
+      engine.runRenderLoop(function () {
+        scene.render();
+      });
+
+      window.addEventListener("resize", function () {
+        engine.resize();
+      });
+
       return scene;
     };
 
-    // call the createScene function
     var scene = createScene();
-    // run the render loop
-    engine.runRenderLoop(function () {
-      scene.render();
-    });
-    // the canvas/window resize event handler
-    window.addEventListener("resize", function () {
-      engine.resize();
-    });
   }, []);
 
   return (
