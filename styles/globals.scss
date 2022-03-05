@@ -38,6 +38,10 @@ a {
   }
 }
 
+h1 {
+  font-size: 2rem;
+}
+
 h1,
 h2,
 h3 {
@@ -60,10 +64,18 @@ dd {
   margin-bottom: 1rem;
 }
 
+.margin-bottom-2 {
+  margin-bottom: 2rem;
+}
+
 .bg-success-3 {
   background: $bg-color-success-3;
 }
 
 .bg-error-3 {
   background: $bg-color-error-3;
+}
+
+.width-100-p {
+  width: 100%;
 }

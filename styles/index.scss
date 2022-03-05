@@ -1,0 +1,14 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.index-root {
+  @include page-root;
+
+  h1 {
+    text-align: left;
+  }
+
+  canvas {
+    width: 100%;
+  }
+}

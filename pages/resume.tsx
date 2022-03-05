@@ -116,7 +116,7 @@ const Resume = () => {
         <CompanySummary
           name="NeuroTacker(인턴십)"
           companySiteUrl="https://www.neurotrackerx.com/"
-          description="인지능력을 향상시키는 게임(훈련)을 개발하는 몬트리올 소재의 게임회사."
+          description="운동선수들의 인지능력을 향상시키는 게임(훈련)을 개발하는 몬트리올 소재의 게임회사."
           duration="2018.08 ~ 2018.12(총 3개월)"
         />
         신제품 프로토타입 개발의 연구보조 업무를 수행.
@@ -191,7 +191,7 @@ const Resume = () => {
               </strong>
             </dd>
 
-            <dt>보안 강화</dt>
+            <dt>보안성 강화</dt>
             <dd>
               CSP, X-Frame-Options 등 보안과 관련된 설정을 최대한 엄격하게 적용,
               AWS WAF를 사용하여 보안 강화.

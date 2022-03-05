@@ -1,20 +1,44 @@
 import { ReactElement, useEffect, useRef } from "react";
 import {
   Engine,
-  Scene,
+  SceneLoader,
   ArcRotateCamera,
+  HemisphericLight,
   Tools,
   Vector3,
-  HemisphericLight,
-  Mesh,
-  StandardMaterial,
-  SceneLoader,
+  Matrix,
+  Color4,
+  ActionManager,
+  ExecuteCodeAction,
+  Material,
 } from "babylonjs";
 import "babylonjs-loaders";
+
+import { CustomLoadingScreen } from "../babylon/custom-loading-screen";
 
 import Layout from "../components/Layout";
 
 import { H } from "../components-base/H";
+import { P } from "../components-base/P";
+import { Container } from "../components-base/Container";
+
+type EmmissiveColor = {
+  r: number;
+  g: number;
+  b: number;
+};
+
+const handleContactClick = (contactType: string) => {
+  const contactLink = window.document.createElement("a");
+
+  if (contactType === "phone") {
+    contactLink.href = "tel:+8201095369050";
+  } else {
+    contactLink.href = "mailto: peter1035k@gmail.com";
+  }
+
+  contactLink.click();
+};
 
 export default function Page() {
   const renderCanvas = useRef<HTMLCanvasElement>(null);
@@ -22,71 +46,95 @@ export default function Page() {
   useEffect(() => {
     if (!renderCanvas.current) return;
 
-    var engine = new Engine(renderCanvas.current, true, {
+    const engine = new Engine(renderCanvas.current, true, {
       preserveDrawingBuffer: true,
       stencil: true,
     });
 
-    var createScene = function () {
-      // This creates a basic Babylon Scene object (non-mesh)
-      var scene = new Scene(engine);
-      scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
-
-      // This creates and positions a free camera (non-mesh)
-      var camera = new ArcRotateCamera(
+    engine.loadingScreen = new CustomLoadingScreen();
+    SceneLoader.Load("../models/", "phone.glb", engine, function (scene) {
+      // Camera
+      const camera = new ArcRotateCamera(
         "ArcRotateCamera",
-        Tools.ToRadians(-270),
-        Math.PI / 3,
-        5.5,
+        Tools.ToRadians(-90),
+        Math.PI / 2,
+        44,
         new Vector3(0, 0, 0),
         scene
       );
-
-      // This targets the camera to scene origin
       camera.setTarget(Vector3.Zero());
-
-      // This attaches the camera to the canvas
       camera.attachControl(renderCanvas.current, true);
 
-      var light = new HemisphericLight("light", new Vector3(0, 10, 0), scene);
+      // Light
+      const light = new HemisphericLight("light", new Vector3(8, 12, 0), scene);
+      light.intensity = 1;
 
-      light.intensity = 0.7;
-
-      var coin1 = Mesh.CreateCylinder("sphere", 0.5, 2, 2, 32, 1, scene);
-      var coin2 = Mesh.CreateCylinder("sphere", 0.5, 2, 2, 32, 1, scene);
-      var coin3 = Mesh.CreateCylinder("sphere", 0.5, 2, 2, 32, 1, scene);
-
-      coin1.position.x = 2.5;
-      coin1.position.y = 0;
-      coin1.rotatePOV(1.1, 0, 0);
-      var coinMatirial = new StandardMaterial("CoinMatirial", scene);
-      coinMatirial.alpha = 1;
-      coinMatirial.diffuseColor = new BABYLON.Color3(1, 1.52, 1);
-      coin1.material = coinMatirial;
-
-      coin2.position.x = 0;
-      coin2.position.y = 0;
-      coin2.rotatePOV(1.1, 0, 0);
-      var coin2Matirial = new StandardMaterial("CoinMatirial", scene);
-      coin2Matirial.alpha = 1;
-      coin2Matirial.diffuseColor = new BABYLON.Color3(1.52, 1, 1);
-      coin2.material = coin2Matirial;
-
-      coin3.position.x = -2.5;
-      coin3.position.y = 0;
-      coin3.rotatePOV(1.1, 0, 0);
-      var coin3Matirial = new StandardMaterial("CoinMatirial", scene);
-      coin3Matirial.alpha = 1;
-      coin3Matirial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
-      coin3.material = coin3Matirial;
-
-      SceneLoader.Load("../models/", "phone.glb", engine, function (scene) {
-        scene.createDefaultCamera(true, true, true);
-        scene.createDefaultEnvironment({
-          createGround: false,
-          createSkybox: false,
-        });
+      // Environment
+      scene.clearColor = new Color4(0, 0, 0, 0);
+      scene.createDefaultEnvironment({
+        createGround: false,
+        createSkybox: false,
       });
+
+      scene.onPointerDown = () => {
+        const ray = scene.createPickingRay(
+          scene.pointerX,
+          scene.pointerY,
+          Matrix.Identity(),
+          camera
+        );
+        const hit = scene.pickWithRay(ray);
+
+        if (hit?.pickedMesh && hit.pickedMesh.name) {
+          handleContactClick(hit.pickedMesh.name);
+        }
+      };
+
+      SceneLoader.AppendAsync("../models/", "mail.glb", scene).then(
+        (sceneAfterMailLoaded) => {
+          const actionManager = new ActionManager(sceneAfterMailLoaded);
+
+          actionManager.registerAction(
+            new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, function (
+              e
+            ) {
+              const material = e.meshUnderPointer?.material as Material & {
+                emissiveColor: EmmissiveColor;
+              };
+              if (material) {
+                material.emissiveColor.r = 0.4;
+                material.emissiveColor.g = 0.4;
+                material.emissiveColor.b = 0.4;
+              }
+            })
+          );
+          //if hover is over remove highlight of the mesh
+          actionManager.registerAction(
+            new ExecuteCodeAction(ActionManager.OnPointerOutTrigger, function (
+              e
+            ) {
+              const material = e.meshUnderPointer?.material as Material & {
+                emissiveColor: EmmissiveColor;
+              };
+              if (material) {
+                material.emissiveColor.r = 0;
+                material.emissiveColor.g = 0;
+                material.emissiveColor.b = 0;
+              }
+            })
+          );
+
+          sceneAfterMailLoaded.meshes.forEach((mesh) => {
+            if (mesh.name === "Mail") {
+              mesh.actionManager = actionManager;
+              mesh.position = new Vector3(-18, 0, 0);
+            } else if (mesh.name === "phone") {
+              mesh.actionManager = actionManager;
+              mesh.position = new Vector3(18, -5, 0);
+            }
+          });
+        }
+      );
 
       engine.runRenderLoop(function () {
         scene.render();
@@ -95,35 +143,42 @@ export default function Page() {
       window.addEventListener("resize", function () {
         engine.resize();
       });
-
-      return scene;
-    };
-
-    var scene = createScene();
+    });
   }, []);
 
   return (
-    <div>
+    <section className="index-root">
       <H level={2}>
         안녕하세요, <br />
         <br />
-        안정적이고 편리한 서비스를 만들기위해 노력하는 프론트엔드 개발자
+        안정적이고 편리한 서비스를 만들기위해 노력하는 개발자
         <br />
         <br />
+        변동혁 입니다.
       </H>
-      <div>
-        <H level={1} className="inline">
-          변동혁
-        </H>
-        &nbsp;
-        <H level={2} className="inline">
-          입니다.
-        </H>
-      </div>
+      <br />
 
-      <canvas ref={renderCanvas}> </canvas>
-      {/* TODO: WebGL활용하여 전화번호, 이메일, 깃헙 등 링크 설정   */}
-    </div>
+      <Container className="container-2 margin-bottom-1">
+        <H level={2}>연락처</H>
+
+        <P>
+          전화번호: <a href="tel:+8201095369050"> 01095369050</a>
+        </P>
+        <P>
+          이메일:
+          <a href="mailto: peter1035k@gmail.com"> peter1035k@gmail.com</a>
+        </P>
+        <P>
+          Github:
+          <a href="https://github.com/PeterByun">
+            {" "}
+            https://github.com/PeterByun
+          </a>
+        </P>
+      </Container>
+
+      <canvas ref={renderCanvas} width="500px"></canvas>
+    </section>
   );
 }
 
