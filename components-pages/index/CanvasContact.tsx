@@ -84,7 +84,7 @@ const CanvasContact = (props: CanvasContactProps) => {
 
     engine.loadingScreen = new CustomLoadingScreen();
 
-    SceneLoader.Load("../models/", "phone.glb", engine, function (scene) {
+    SceneLoader.Load("/assets/models/", "phone.glb", engine, function (scene) {
       // Camera
       const camera = new ArcRotateCamera(
         "ArcRotateCamera",
@@ -124,7 +124,7 @@ const CanvasContact = (props: CanvasContactProps) => {
       };
 
       // Load models
-      SceneLoader.AppendAsync("../models/", "mail.glb", scene).then(
+      SceneLoader.AppendAsync("/assets/models/", "mail.glb", scene).then(
         (sceneAfterMailLoaded) => {
           const actionManager = new ActionManager(sceneAfterMailLoaded);
 

@@ -4,6 +4,10 @@ type LoadingSpinnerProps = {
 export const LoadingSpinner = (props: LoadingSpinnerProps) => {
   const { width = "150" } = props;
   return (
-    <img src="/icons/loading-spinner.svg" alt="loading-spinner" width={width} />
+    <img
+      src="/assets/icons/loading-spinner.svg"
+      alt="loading-spinner"
+      width={width}
+    />
   );
 };

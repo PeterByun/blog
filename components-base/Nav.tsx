@@ -1,16 +1,15 @@
 import { HTMLAttributes } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
-import ResumeIconActive from "../public/icons/resume-active.png";
-import ResumeIconInactive from "../public/icons/resume-inactive.png";
+const ResumeIconActive = "/assets/icons/resume-active.png";
+const ResumeIconInactive = "/assets/icons/resume-inactive.png";
 
-import HomeIconInactive from "../public/icons/home-inactive.png";
-import HomeIconActive from "../public/icons/home-active.png";
+const HomeIconInactive = "/assets/icons/home-inactive.png";
+const HomeIconActive = "/assets/icons/home-active.png";
 
-import PostsIconInactive from "../public/icons/posts-inactive.png";
-import PostsIconActive from "../public/icons/posts-active.png";
+const PostsIconInactive = "/assets/icons/posts-inactive.png";
+const PostsIconActive = "/assets/icons/posts-active.png";
 
 const routes = {
   resume: "/resume",
@@ -27,8 +26,8 @@ type LinkWrapperProps = {
   label: string;
   href: string;
   isLinkActive: boolean;
-  IconActive: StaticImageData;
-  IconInactive: StaticImageData;
+  IconActive: string;
+  IconInactive: string;
 };
 
 const LinkWrapper = (props: LinkWrapperProps) => {
@@ -39,7 +38,7 @@ const LinkWrapper = (props: LinkWrapperProps) => {
   return (
     <Link href={href}>
       <span className={linkWrapperClass}>
-        <Image
+        <img
           className="link-img"
           alt={name}
           src={isLinkActive ? IconActive : IconInactive}
@@ -50,7 +49,7 @@ const LinkWrapper = (props: LinkWrapperProps) => {
   );
 };
 
-const Nav = (props: {} & HTMLAttributes<HTMLDivElement>) => {
+const Nav = (props: HTMLAttributes<HTMLDivElement>) => {
   const router = useRouter();
 
   const getIsLinkActive = getIsLinkActiveWithP(router.pathname);
