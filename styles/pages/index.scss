@@ -9,7 +9,7 @@
 .index-root {
   @include page-root;
 
-  h1 {
+  h2 {
     @include index-content-width;
     text-align: left;
   }

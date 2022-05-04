@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
+
 import { H } from "../../components-base/H";
+import { LoadingSpinner } from "../../components/LoadingSpinner";
 
 class InnerHtmlHolder {
   __html: string;
@@ -43,12 +45,16 @@ export default function Post() {
         <div></div>
       </header>
 
-      <article className="post">
-        <H level={1} className="post-title">
-          {postTitle}
-        </H>
-        <p dangerouslySetInnerHTML={postContent} className="post-content"></p>
-      </article>
+      {postContent.__html ? (
+        <article className="post">
+          <H level={1} className="post-title">
+            {postTitle}
+          </H>
+          <p dangerouslySetInnerHTML={postContent} className="post-content"></p>
+        </article>
+      ) : (
+        <LoadingSpinner />
+      )}
     </section>
   );
 }

@@ -28,7 +28,7 @@ export default function Page() {
         2년 경력의 프론트엔드 개발자 변동혁 입니다.
         <br />
         <br />
-        Sephora, Macy's, Xiaomi 등 전세계의 대형 유통업체에 공급된 전자상표 관리
+        Sephora, Macy's, Xiaomi 등 전세계의 유통업체에 공급된 전자가격표 관리
         시스템 AIMS의 프론트엔드와
         <br />
         <br />

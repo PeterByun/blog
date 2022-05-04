@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { CustomLoadingScreen } from "../../babylon/custom-loading-screen";
 import {
   Engine,
   SceneLoader,
@@ -15,8 +13,9 @@ import {
   Material,
 } from "babylonjs";
 import "babylonjs-loaders";
+import { CustomLoadingScreen } from "../../babylon/custom-loading-screen";
 
-import LoadingSpinner from "../../public/icons/loading-spinner.svg";
+import { LoadingSpinner } from "../../components/LoadingSpinner";
 
 type EmmissiveColor = {
   r: number;
@@ -198,7 +197,7 @@ const CanvasContact = (props: CanvasContactProps) => {
       ></canvas>
 
       <div className={loadingScreenClassName}>
-        <Image alt="loading-spinner" src={LoadingSpinner} />
+        <LoadingSpinner></LoadingSpinner>
       </div>
     </div>
   );
