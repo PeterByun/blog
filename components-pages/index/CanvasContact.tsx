@@ -16,7 +16,7 @@ import {
 } from "babylonjs";
 import "babylonjs-loaders";
 
-import LoadingSpinner from "../../assets/icons/loading-spinner.svg";
+import LoadingSpinner from "../../public/icons/loading-spinner.svg";
 
 type EmmissiveColor = {
   r: number;

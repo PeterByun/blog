@@ -3,14 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import ResumeIconActive from "../assets/icons/resume-active.png";
-import ResumeIconInactive from "../assets/icons/resume-inactive.png";
+import ResumeIconActive from "../public/icons/resume-active.png";
+import ResumeIconInactive from "../public/icons/resume-inactive.png";
 
-import HomeIconInactive from "../assets/icons/home-inactive.png";
-import HomeIconActive from "../assets/icons/home-active.png";
+import HomeIconInactive from "../public/icons/home-inactive.png";
+import HomeIconActive from "../public/icons/home-active.png";
 
-import PostsIconInactive from "../assets/icons/posts-inactive.png";
-import PostsIconActive from "../assets/icons/posts-active.png";
+import PostsIconInactive from "../public/icons/posts-inactive.png";
+import PostsIconActive from "../public/icons/posts-active.png";
 
 const routes = {
   resume: "/resume",
