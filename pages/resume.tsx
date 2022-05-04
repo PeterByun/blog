@@ -185,10 +185,11 @@ const Resume = () => {
             리팩토링을 통한 유지보수성과 성능 개선
             <ol>
               <li>
-                <span>
+                <div>
                   기존에 Vue2의 Options API로 작성된 서비스를 React Hook기반으로
                   Atomic Design 원칙을 적용하여 재작성.
-                </span>
+                </div>
+
                 <span>
                   <Span className="bg-success-3">효과</Span>
                   <ul>
