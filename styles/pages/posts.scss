@@ -1,0 +1,16 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.posts-root {
+  @include page-root;
+
+  h1 {
+    width: 100%;
+    text-align: left;
+  }
+
+  .posts-item {
+    width: 100%;
+    cursor: pointer;
+  }
+}

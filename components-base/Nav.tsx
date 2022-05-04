@@ -1,7 +1,16 @@
 import { HTMLAttributes } from "react";
-
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
+
+import ResumeIconActive from "../assets/icons/resume-active.png";
+import ResumeIconInactive from "../assets/icons/resume-inactive.png";
+
+import HomeIconInactive from "../assets/icons/home-inactive.png";
+import HomeIconActive from "../assets/icons/home-active.png";
+
+import PostsIconInactive from "../assets/icons/posts-inactive.png";
+import PostsIconActive from "../assets/icons/posts-active.png";
 
 const routes = {
   resume: "/resume",
@@ -9,27 +18,71 @@ const routes = {
   posts: "/posts",
 };
 
-const getLinkClassByCurrentPath =
-  (routerPathName: string) => (pathName: string) => {
-    return routerPathName === pathName ? "active" : "";
-  };
+const getIsLinkActiveWithP = (routerPathName: string) => (pathName: string) => {
+  return routerPathName === pathName;
+};
+
+type LinkWrapperProps = {
+  name: string;
+  label: string;
+  href: string;
+  isLinkActive: boolean;
+  IconActive: StaticImageData;
+  IconInactive: StaticImageData;
+};
+
+const LinkWrapper = (props: LinkWrapperProps) => {
+  const { name, label, href, isLinkActive, IconActive, IconInactive } = props;
+  const linkWrapperClass = isLinkActive
+    ? "link-wrapper active"
+    : "link-wrapper";
+  return (
+    <Link href={href}>
+      <span className={linkWrapperClass}>
+        <Image
+          className="link-img"
+          alt={name}
+          src={isLinkActive ? IconActive : IconInactive}
+        />
+        {label}
+      </span>
+    </Link>
+  );
+};
 
 const Nav = (props: {} & HTMLAttributes<HTMLDivElement>) => {
   const router = useRouter();
 
-  const getLinkClass = getLinkClassByCurrentPath(router.pathname);
+  const getIsLinkActive = getIsLinkActiveWithP(router.pathname);
 
   return (
     <nav {...props} className="nav-root">
-      <Link href={routes.resume}>
-        <a className={getLinkClass(routes.resume)}>이력서</a>
-      </Link>
-      <Link href={routes.home}>
-        <a className={getLinkClass(routes.home)}>처음으로</a>
-      </Link>
-      <Link href={routes.posts}>
-        <a className={getLinkClass(routes.posts)}>게시글</a>
-      </Link>
+      <LinkWrapper
+        href={routes.resume}
+        name="resume"
+        label="경력"
+        isLinkActive={getIsLinkActive(routes.resume)}
+        IconActive={ResumeIconActive}
+        IconInactive={ResumeIconInactive}
+      />
+
+      <LinkWrapper
+        href={routes.home}
+        name="home"
+        label="소개"
+        isLinkActive={getIsLinkActive(routes.home)}
+        IconActive={HomeIconActive}
+        IconInactive={HomeIconInactive}
+      />
+
+      <LinkWrapper
+        href={routes.posts}
+        name="posts"
+        label="게시글"
+        isLinkActive={getIsLinkActive(routes.posts)}
+        IconActive={PostsIconActive}
+        IconInactive={PostsIconInactive}
+      />
     </nav>
   );
 };

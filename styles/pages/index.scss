@@ -1,0 +1,39 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+@mixin index-content-width {
+  width: 45rem;
+  max-width: 100%;
+}
+
+.index-root {
+  @include page-root;
+
+  h1 {
+    @include index-content-width;
+    text-align: left;
+  }
+
+  .canvas-contact {
+    @include index-content-width;
+  }
+
+  .canvas-contact-loading {
+    @include index-content-width;
+    height: 15rem;
+  }
+
+  .contact-container {
+    @include index-content-width;
+
+    h2 {
+      text-align: left;
+    }
+    dt {
+      color: $text-secondary;
+    }
+    dd {
+      margin: 0 0 1rem 0;
+    }
+  }
+}

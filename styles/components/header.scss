@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  & > div {
+    min-width: 3rem;
+    min-height: 1rem;
+  }
+
+  .button-back {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: transparent;
+    background-image: url(../../assets/icons/left-arrow.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+  }
+}

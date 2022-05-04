@@ -1,0 +1,19 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.post-root {
+  @include page-root;
+
+  .post {
+    max-width: 80%;
+
+    .post-title {
+      width: 100%;
+      text-align: left;
+    }
+    .post-content {
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
