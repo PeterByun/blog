@@ -11,36 +11,6 @@ type Post = {
   title: string;
 };
 
-class StorageWithExpiration {
-  storage: Storage;
-
-  constructor(storageType: "local" | "session") {
-    this.storage =
-      storageType === "local" ? window.localStorage : window.sessionStorage;
-  }
-
-  setItem(key: string, value: string): void {
-    const storageItem = {
-      createdAt: new Date().toUTCString(),
-      value: value,
-    };
-    this.storage.setItem(key, JSON.stringify(storageItem));
-  }
-
-  getItem(key: string) {
-    const storageItem = this.storage.getItem(key);
-    if (!storageItem) return storageItem;
-
-    const parsedStorageItem = JSON.parse(storageItem);
-    // TODO: calculate the expiration date
-    if (new Date() > new Date(parsedStorageItem.createdAt)) {
-      return undefined;
-    } else {
-      return parsedStorageItem.value;
-    }
-  }
-}
-
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
@@ -48,8 +18,6 @@ const Posts = () => {
       .then<Post[]>((response) => response.json())
       .then((data) => {
         setPosts(data);
-
-        new CustomStorage("local").setItem(data, new Date());
       });
   }, []);
 
