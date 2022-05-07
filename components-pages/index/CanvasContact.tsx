@@ -11,11 +11,13 @@ import {
   ActionManager,
   ExecuteCodeAction,
   Material,
+  Animation,
 } from "babylonjs";
 import "babylonjs-loaders";
 import { CustomLoadingScreen } from "../../babylon/custom-loading-screen";
 
 import { LoadingSpinner } from "../../components/LoadingSpinner";
+import { AnimationManager } from "../../utils/animation";
 
 type EmmissiveColor = {
   r: number;
@@ -74,6 +76,14 @@ const CanvasContact = (props: CanvasContactProps) => {
 
   const renderCanvas = useRef<HTMLCanvasElement>(null);
 
+  const animationManagerRef = useRef<AnimationManager>(new AnimationManager());
+
+  useEffect(() => {
+    return () => {
+      animationManagerRef.current.clearTimers();
+    };
+  }, []);
+
   useEffect(() => {
     if (!renderCanvas.current) return;
 
@@ -88,7 +98,7 @@ const CanvasContact = (props: CanvasContactProps) => {
       // Camera
       const camera = new ArcRotateCamera(
         "ArcRotateCamera",
-        Tools.ToRadians(-100),
+        Tools.ToRadians(-60),
         Math.PI / 2,
         55,
         new Vector3(0, 0, 0),
@@ -98,8 +108,12 @@ const CanvasContact = (props: CanvasContactProps) => {
       camera.attachControl(renderCanvas.current, true);
 
       // Load lights
-      const light = new HemisphericLight("light", new Vector3(9, 10, 0), scene);
-      light.intensity = 3;
+      const light = new HemisphericLight(
+        "light",
+        new Vector3(-10, 5, -8),
+        scene
+      );
+      light.intensity = 5;
 
       // Load environment
       scene.clearColor = new Color4(0.11, 0.11, 0.11, 1);
@@ -123,6 +137,31 @@ const CanvasContact = (props: CanvasContactProps) => {
         }
       };
 
+      // Floating Animation
+      const frameRate = 10;
+      const animationFloating = new BABYLON.Animation(
+        "animationFloating",
+        "position.y",
+        frameRate,
+        BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+        BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+      );
+      const keyFrames = [
+        {
+          frame: 0,
+          value: 0,
+        },
+        {
+          frame: frameRate * 0.2,
+          value: 2,
+        },
+        {
+          frame: frameRate * 0.4,
+          value: 0,
+        },
+      ];
+      animationFloating.setKeys(keyFrames);
+
       // Load models
       SceneLoader.AppendAsync("/assets/models/", "mail.glb", scene).then(
         (sceneAfterMailLoaded) => {
@@ -139,6 +178,25 @@ const CanvasContact = (props: CanvasContactProps) => {
                 material.emissiveColor.r = 0.4;
                 material.emissiveColor.g = 0.4;
                 material.emissiveColor.b = 0.4;
+              }
+
+              if (e.meshUnderPointer) {
+                e.meshUnderPointer.rotationQuaternion = null;
+                e.meshUnderPointer.animations.push(
+                  animationFloating as unknown as Animation
+                );
+
+                animationManagerRef.current.run(
+                  `${material.name},floating`,
+                  () => {
+                    scene.beginAnimation(
+                      e.meshUnderPointer,
+                      0,
+                      0.4 * frameRate,
+                      false
+                    );
+                  }
+                );
               }
             })
           );
@@ -162,9 +220,11 @@ const CanvasContact = (props: CanvasContactProps) => {
             if (mesh.name === "Mail") {
               mesh.actionManager = actionManager;
               mesh.position = new Vector3(-18, 0, 0);
+              mesh.rotation = new Vector3(0, 0, Math.PI * 1.5);
             } else if (mesh.name === "phone") {
               mesh.actionManager = actionManager;
-              mesh.position = new Vector3(18, -5, 0);
+              mesh.position = new Vector3(18, 0, 0);
+              mesh.rotation = new Vector3(0, 0, Math.PI * 1.5);
             }
           });
         }
