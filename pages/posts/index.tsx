@@ -41,7 +41,7 @@ const Posts: NextPageWithLayout = () => {
           );
         })
       ) : (
-        <LoadingSpinner width="10vw" />
+        <LoadingSpinner size="sm" />
       )}
     </section>
   );

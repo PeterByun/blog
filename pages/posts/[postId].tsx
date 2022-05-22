@@ -53,7 +53,7 @@ export default function Post() {
           <p dangerouslySetInnerHTML={postContent} className="post-content"></p>
         </article>
       ) : (
-        <LoadingSpinner />
+        <LoadingSpinner size="sm" />
       )}
     </section>
   );

@@ -1,17 +1,18 @@
 type LoadingSpinnerProps = {
-  width?: string;
+  size?: "sm" | "md" | "lg";
 };
 
 export const LoadingSpinner = (props: LoadingSpinnerProps) => {
-  const { width = "150px" } = props;
+  const { size = "sm" } = props;
+
+  const className = `img-size-${size}`;
+
   return (
     <img
       src="/assets/icons/loading-spinner.svg"
       alt="loading-spinner"
       width="150"
-      style={{
-        width: `${width} !important`,
-      }}
+      className={className}
     />
   );
 };
