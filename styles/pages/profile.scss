@@ -45,4 +45,16 @@
   .history-description {
     margin: 1rem 0;
   }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .skill-logo {
+    background-color: $bg-color-2;
+    border-radius: 100%;
+    padding: 1rem;
+  }
 }
