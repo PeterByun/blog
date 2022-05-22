@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
+import { NextPageWithLayout } from "../../types/component-types";
 
 import Layout from "../../components/Layout";
 import { H } from "../../components-base/H";
@@ -11,8 +12,9 @@ type Post = {
   title: string;
 };
 
-const Posts = () => {
+const Posts: NextPageWithLayout = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}/posts`)
       .then<Post[]>((response) => response.json())
@@ -28,9 +30,9 @@ const Posts = () => {
         posts.map((post) => {
           return (
             <Container
+              key={post.blockId}
               role="button"
               className="posts-item container-2 margin-bottom-1"
-              key={post.blockId}
             >
               <Link href={`/posts/${post.blockId}?postTitle=${post.title}`}>
                 <h3>{post.title}</h3>
@@ -39,14 +41,14 @@ const Posts = () => {
           );
         })
       ) : (
-        <LoadingSpinner />
+        <LoadingSpinner width="10vw" />
       )}
     </section>
   );
 };
 
-export default Posts;
-
 Posts.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export default Posts;

@@ -1,7 +1,16 @@
+@mixin index-content-width {
+  width: 45rem;
+  max-width: 100%;
+}
+
 @mixin page-root {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  & > * {
+    @include index-content-width;
+  }
 }

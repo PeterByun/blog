@@ -1,9 +1,15 @@
-import { AnchorHTMLAttributes } from "react";
+import React from "react";
+import { BaseComponentProps } from "../types/component-types";
+import { AnchorAttributes } from "../types/dom-types";
 
-export const A = (props: {} & AnchorHTMLAttributes<HTMLAnchorElement>) => {
+type AnchorProps = BaseComponentProps<AnchorAttributes>;
+
+export const A = (props: AnchorProps) => {
+  const { children, href } = props;
+
   return (
-    <a href="" {...props}>
-      {props.children}
+    <a href={href} {...props}>
+      {children}
     </a>
   );
 };

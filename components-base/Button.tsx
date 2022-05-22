@@ -1,5 +1,8 @@
-import { ButtonHTMLAttributes } from "react";
+import { BaseComponentProps } from "../types/component-types";
+import { ButtonAttributes } from "../types/dom-types";
 
-export const Button = (props: {} & ButtonHTMLAttributes<HTMLButtonElement>) => {
+type ButtonProps = BaseComponentProps<ButtonAttributes>;
+
+export const Button = (props: ButtonProps) => {
   return <button {...props}>{props.children}</button>;
 };

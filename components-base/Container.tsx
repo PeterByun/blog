@@ -1,9 +1,8 @@
-import { HTMLAttributes } from "react";
+import { BaseComponentProps } from "../types/component-types";
+import { DivAttributes } from "../types/dom-types";
 
-export const Container = (
-  props: {
-    children?: React.ReactNode;
-  } & HTMLAttributes<HTMLDivElement>
-) => {
+type ContainerProps = BaseComponentProps<DivAttributes>;
+
+export const Container = (props: ContainerProps) => {
   return <div {...props}>{props.children}</div>;
 };

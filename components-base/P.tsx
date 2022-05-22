@@ -1,5 +1,6 @@
-import { HTMLAttributes } from "react";
+import { BaseComponentProps } from "../types/component-types";
+import { ParagraphAttributes } from "../types/dom-types";
 
-export const P = (props: {} & HTMLAttributes<HTMLParagraphElement>) => {
+export const P = (props: BaseComponentProps<ParagraphAttributes>) => {
   return <p {...props}>{props.children}</p>;
 };

@@ -1,10 +1,11 @@
-import { HTMLAttributes } from "react";
+import { BaseComponentProps } from "../types/component-types";
+import { HeadingAttributes } from "../types/dom-types";
 
-export const H = (
-  props: {
-    level: number;
-  } & HTMLAttributes<HTMLHeadingElement>
-) => {
+type HeadingProps = BaseComponentProps<HeadingAttributes> & {
+  level: number;
+};
+
+export const H = (props: HeadingProps) => {
   return (
     <>
       {props.level === 1 ? (

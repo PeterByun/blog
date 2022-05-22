@@ -1,21 +1,28 @@
 @import "../variables.scss";
 @import "../mixins.scss";
 
-@mixin index-content-width {
-  width: 45rem;
-  max-width: 100%;
-}
-
-.index-root {
+.profile-root {
   @include page-root;
 
-  h2 {
-    @include index-content-width;
+  h1 {
     text-align: left;
   }
 
-  .canvas-contact {
-    @include index-content-width;
+  h2 {
+    text-align: left;
+  }
+
+  hr {
+    margin-top: 5rem;
+  }
+
+  dl {
+    dt {
+      font-weight: 800;
+    }
+    dd {
+      margin-bottom: 1rem;
+    }
   }
 
   .canvas-contact-loading {
@@ -24,8 +31,6 @@
   }
 
   .contact-container {
-    @include index-content-width;
-
     h2 {
       text-align: left;
     }
@@ -35,5 +40,9 @@
     dd {
       margin: 0 0 1rem 0;
     }
+  }
+
+  .history-description {
+    margin: 1rem 0;
   }
 }
