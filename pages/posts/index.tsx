@@ -1,5 +1,8 @@
 import { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
+import { getPosts } from "../../utils/apis-blog";
+import { useQuery } from "react-query";
+
 import { NextPageWithLayout } from "../../types/component-types";
 
 import Layout from "../../components/Layout";
@@ -7,26 +10,13 @@ import { H } from "../../components-base/H";
 import { Container } from "../../components-base/Container";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 
-type Post = {
-  blockId: string;
-  title: string;
-};
-
 const Posts: NextPageWithLayout = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}/posts`)
-      .then<Post[]>((response) => response.json())
-      .then((data) => {
-        setPosts(data);
-      });
-  }, []);
+  const { data: posts } = useQuery("todos", getPosts);
 
   return (
     <section className="posts-root">
       <H level={1}>게시글</H>
-      {posts.length ? (
+      {posts?.length ? (
         posts.map((post) => {
           return (
             <Container

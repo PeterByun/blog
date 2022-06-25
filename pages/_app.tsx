@@ -10,10 +10,17 @@ import "../styles/components/nav.scss";
 import "../styles/components/container.scss";
 import "../styles/components/canvas-contact.scss";
 
+import { QueryClient, QueryClientProvider } from "react-query";
 import { AppPropsWithLayout } from "../types/component-types";
 
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(<Component {...pageProps} />);
+  const queryClient = new QueryClient();
+
+  return getLayout(
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  );
 }
